@@ -8,6 +8,7 @@ import { createServer } from 'http';
 import { Server as SocketServer } from 'socket.io';
 import { startDb } from './config/relations.js';
 import { environments } from './config/environments.js'
+import pruebaRouter from './routes/prueba.routes.js';
 
 // Configuración
 const app = express();
@@ -22,9 +23,11 @@ app.use(express.json());
 app.use(cors());
 app.use(morgan('dev'))
 app.use(helmet())
-app.use(fileUpload)
+app.use(fileUpload())
 
 // Rutas
+
+app.use('/api', pruebaRouter)
 
 // Socket.io
 
