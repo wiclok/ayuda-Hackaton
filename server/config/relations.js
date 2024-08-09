@@ -1,4 +1,4 @@
-import { sequelize } from "./database";
+import { sequelize } from "./database.js";
 
 export async function startDb() {
   try {
