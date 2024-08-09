@@ -6,7 +6,7 @@ export const sequelize = new Sequelize(
   environments.DB.USER,
   environments.DB.PASSWORD,
   {
-    host: environments.DB.HOST, 
+    host: environments.DB.HOST,
     dialect: environments.DB.DIALECT,
     port: environments.DB.PORT,
   }
