@@ -15,6 +15,8 @@ const app = express();
 const httpServer = createServer(app);
 const io = new SocketServer(httpServer);
 
+const PORT = process.env.PORT
+
 // Middlewares
 app.use(express.json());
 app.use(cors());
@@ -41,7 +43,7 @@ io.on('connection', (socket) => {
   });
 });
 
-httpServer.listen(3000, () => {
-  console.log(`Server on http://localhost:${3000}`);
+httpServer.listen(PORT, () => {
+  console.log(`Server on http://localhost:${PORT}`);
   startDb()
 });
