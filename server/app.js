@@ -6,6 +6,8 @@ import morgan from 'morgan';
 import fileUpload from 'express-fileupload';
 import { createServer } from 'http';
 import { Server as SocketServer } from 'socket.io';
+import { startDb } from './config/relations.js';
+import { environments } from './config/environments.js'
 
 // Configuración
 const app = express();
@@ -41,5 +43,6 @@ io.on('connection', (socket) => {
 
 httpServer.listen(3000, () => {
   console.log(`Server on http://localhost:${3000}`);
-  // startDb()
+  // console.log(environments.DB)
+  startDb()
 });
