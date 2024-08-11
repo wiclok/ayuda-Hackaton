@@ -8,7 +8,7 @@ import { createServer } from 'http';
 import { Server as SocketServer } from 'socket.io';
 import { startDb } from './config/relations.js';
 import { environments } from './config/environments.js'
-import pruebaRouter from './routes/prueba.routes.js';
+import authRouter from './routes/auth.routes.js';
 
 // Configuración
 const app = express();
@@ -16,7 +16,7 @@ const app = express();
 const httpServer = createServer(app);
 const io = new SocketServer(httpServer);
 
-const PORT = process.env.PORT
+const PORT = environments.PORT
 
 // Middlewares
 app.use(express.json());
@@ -27,7 +27,7 @@ app.use(fileUpload())
 
 // Rutas
 
-app.use('/api', pruebaRouter)
+app.use('/api/user', authRouter)
 
 // Socket.io
 
