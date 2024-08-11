@@ -1,8 +1,11 @@
 import { UserModel } from '../models/user.model.js';
+import { hashString } from '../helper/hashString.js'
 
 // Create a new user
 export const createUser = async (user) => {
   try {
+    const hashedPassword = await hashString(user.password);
+    user.password = hashedPassword;
     const newUser = await UserModel.create(user);
     return newUser;
   }
