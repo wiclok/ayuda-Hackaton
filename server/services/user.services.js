@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt'
 import { UserModel } from '../models/user.model.js';
 import { hashString } from '../helper/hashString.js'
 
@@ -62,8 +63,15 @@ export const getUserByEmail = async (email) => {
 // Get user by email and password
 export const getUserByEmailAndPassword = async (email, password) => {
   try {
-    const findUserByEmailAndPassword = await UserModel.findOne( { where: { email, password } } );
-    return findUserByEmailAndPassword;
+    const user = await UserModel.findOne( { where: { email } });
+    if (!user) {
+      throw new Error('User not found');
+    }
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      throw new Error('Incorrect password');
+    }
+    return user;
   } catch (err) {
     console.error(err);
     throw new Error('Error getting user by email and password');
